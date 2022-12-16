@@ -1,7 +1,7 @@
 from gpiozero import Servo
 from time import sleep
 import RPi.GPIO as GPIO
-
+import db
 from gpiozero.pins.pigpio import PiGPIOFactory
 
 factory = PiGPIOFactory()
@@ -51,6 +51,7 @@ try:
             previous_button_state = button_state
             if button_state == GPIO.HIGH:
                 open_barrier()
+
 except KeyboardInterrupt:
     GPIO.cleanup()
 

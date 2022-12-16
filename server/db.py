@@ -8,10 +8,12 @@ firebase_admin.initialize_app(cred)
 
 db = firestore.client()
 
-doc_ref = db.collections(u'parking')
 
-doc = doc_ref.get()
-if doc.exists:
-    print(f'Document data: {doc.to_dict()}')
-else:
-    print(u'No such file found')
+def save_car_enter():
+    print('ho')
+    data = {
+        u'name': u'Los Angeles',
+        u'state': u'CA',
+        u'country': u'USA'
+    }
+    db.collection(u'parking').document(u'LA').set(data)
