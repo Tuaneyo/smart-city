@@ -1,28 +1,45 @@
 from operator import le
+from threading import Thread
+import json
 from rpi_lcd import LCD
 import RPi.GPIO as GPIO
 import time
 GPIO.setmode(GPIO.BCM)
 
-lcd = LCD()
-TRIG = 23   
+TRIG = 23
 ECHO = 24
 LED_RED = 17
-# LED_YELLOW = 27
 LED_GREEN = 22
+LED_RED1 = 26
+LED_GREEN1 = 19
 
-lcd.text("Distance measurement",1)
-lcd.text("in Progress",2)
+# def PK_1():
+#     global TRIG
+#     TRIG = 21
+#     ECHO = 20
+#     LED_RED = 26
+#     LED_GREEN = 19
+
+# def PK_2():
+#     TRIG = 23   
+#     ECHO = 24
+#     LED_RED = 17
+#     # LED_YELLOW = 27
+#     LED_GREEN = 22
+
+lcd = LCD()
+GPIO.setwarnings(False)
 GPIO.setup(TRIG, GPIO.OUT)
 GPIO.setup(ECHO, GPIO.IN)
 GPIO.setup(LED_GREEN,GPIO.OUT)
 GPIO.setup(LED_RED,GPIO.OUT)
+GPIO.setup(LED_GREEN1,GPIO.OUT)
+GPIO.setup(LED_RED1,GPIO.OUT)
 
-GPIO.setwarnings(False)
 try:
     lcd.clear()
     lcd.text("Waiting for ",1)
-    lcd.text("sensor to Settle",2)    
+    lcd.text("sensor to Settle",2)
     while True:
         GPIO.output(TRIG, False)
         
@@ -45,23 +62,50 @@ try:
         
         if distance >= 20:
             GPIO.output(LED_GREEN, GPIO.HIGH)
+            GPIO.output(LED_GREEN1, GPIO.HIGH)
+            # GPIO.output(LED_RED1, GPIO.HIGH)
+            
             GPIO.output(LED_RED, GPIO.LOW) 
-            PK_space = 0
+            GPIO.output(LED_RED1, GPIO.LOW) 
+            lcd.clear() 
+            lcd.text("Beschikbaar:" ,1) 
+            text = "Plaats"
+            if GPIO.input(LED_GREEN) == True:
+                text += " 1"
+            if GPIO.input(LED_GREEN1) == True:
+                text += " ,2"
+            if GPIO.input(LED_RED) == True:
+                text = text.replace("1", "")
+                text = text.replace(",2", "2") 
+            if GPIO.input(LED_RED1) == True:
+                text = text.replace(",2", "") 
+            # else:
+            
+            lcd.text(text ,2) 
+
+            
         else:
             GPIO.output(LED_GREEN, GPIO.LOW)
-            PK_space = 1
-            GPIO.output(LED_RED, GPIO.HIGH)  
-        time.sleep(2)
-        lcd.clear()            
-        lcd.text(str(PK_space),1) 
-    
+            GPIO.output(LED_RED, GPIO.HIGH) 
+            if len(text) <= 7:
+                lcd.clear()
+                lcd.text("Garage is vol",1)
+            elif GPIO.input(LED_RED) == True:
+                text = text.replace("1", "")
+                text = text.replace(",2", "2") 
+                lcd.text(text ,2) 
+            elif GPIO.input(LED_RED1) == True:
+                text = text.replace(",2", "") 
+                lcd.text(text ,2) 
+ 
+        # lcd.clear()
+        # lcd.text("Distance:" + str(distance) + "cm",1)
 except KeyboardInterrupt:
     print("Cleaning up!")
     GPIO.cleanup
     GPIO.output(LED_GREEN,GPIO.LOW)
     GPIO.output(LED_RED, GPIO.LOW)  
-    lcd.clear() 
-
-    
-
-                                                                                                                                                                                                                                                              
+    GPIO.output(LED_GREEN1,GPIO.LOW)
+    GPIO.output(LED_RED1, GPIO.LOW)  
+    lcd.clear()                                                                                                                                                                                                                                            
+                             
