@@ -1,13 +1,12 @@
 {
-    "type": "service_account",
-    "project_id": "smart-city-54346",
-    "private_key_id": "2cadf82ea341b11ee570992a96c476342507da33",
-    "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQCqTFn2ociumykM\nLhZV0ssRjTOkiBA92s218DcxCNCPL92FP25L5FsXRMbzgR4gpbdepQrIG4umcwTO\nARzSSeWqeULzFRPJFovZBdcERhM/kqRYJNKYifh+rF+5GSyj3pEreanHmKdxlnf8\niCsRdFa1ZjtE6iBHMO1B0UarJZWb0SM9mQr3BkF3umuJRyk+ifAM/l75bn0QPAKh\nJWZxr0en3rd2jU9kc4fPNaGPnAketdjmlFtfxJT2wZ8Cv+8tTcpBhAoavzyOB0wK\nS4nOEv2cks4FmDvyImKbb4+rWlhYZkzzx6ljDty3wdxNGqx0NayM3CYME9DHnV6o\n66hmmhbnAgMBAAECggEACExrUd0+Xz4a79DdZzGFJJg9T0h880Rk/0CFRI8lQpvW\npgiaQlVXqm9SjW21cWodTmbyetaygLWBR7gHlszhoSzeHr+7wl/KvssExgFBUW/j\negCt7VZoZxvVPJZF45uBmy90+mH2rJebM8hkCyppt9aloZY2ieGQC+hOEtk/3qxH\nMkrmVBOUwQaH9aK/qgLHedFYo+XnNcj87b49sjcWCeqwQHlX4oMFLYW6Y8I99pL3\nsc++MbuWGcflNSJRC8zw1l8I0HAlrazgPpSPUW4vIsR+qsGku/0nUYg2DONRnFzD\nZj4nAivK0CWT81bfgG/DGh/SiwQ9ihzaC46SmnRPMQKBgQDdkBdbynoU76qTZjGj\n8p/MPrbi69AGhfKMrZy7z6ul3t69rYy6jw0SobimvFwjd3EQ5zflwkK5ygHdxzzy\nHQRuzvJ1wVJEXcc6WPZs9B2SKYrB4XJ+yp+F2yv0qlYTG4O8vdP1g6EM1Yy/Jcn5\nPXnvuALI0/JdJ9ogT+J0xe2aiQKBgQDExHWTc5+QSIpAWx37djQ/86MYR2fpF6b5\nb9yJenR6ddCKje7iAYTxnOKenMfz4Sl1inxUJmTitBKYsQgTZXEIFuLb/5F3wBhK\n8shP8Ar41ZoT0/YkIiwaejH7ClfQxyfdTWIq1CdXHsQ0ecIA1KcAXti88ccxCglK\nqOsd8pgJ7wKBgQCUuZx0aT35v8domjjILJ1HpPFu8Yv6VP+znvaOu6Ak/63U9SJ6\nOHw1/YjNo7LVu9+R0SOcfwH7ZLZMAOnQO9o154SpttNaQPjzGbSQ/my7KFeUPZl1\nst3SJIUk/xI4UUfk8ifNrkX1L4QC64LgY3vuhj6YQG14SsAI4JbKe/I6wQKBgA1m\nT5d2BUS/G+McEWOhfhdo0Q+DNVlTSgSskHkwRKReR5BX8A+mCNanV2tzw84g5EDj\n6GmWn8IsfyO00pb3joX9gP94XQCprT3VYLzI3QZrDW4SPi3hwd0fuy2cW7SVC2rv\nrSK7hd5R8wybyhFiaekFjH75fBYj19QkwrYsYhwzAoGBANz/qDakhYjlCJbUTRlg\nW7qS4TemYGSjQBp07pckHWADySJ+0sNcc7w0+LV3km5Euf+oQwBH+jLb3g16Ix7X\n4Fbw6dC0gxgQOeZgLkqjY7cwp5l35MW7U8mUUrqUVf3ZATORwx3FawUKgrazu/c3\nPamJqpa1730W9sCEAbTTsgLN\n-----END PRIVATE KEY-----\n",
-    "client_email": "firebase-adminsdk-z2vwc@smart-city-54346.iam.gserviceaccount.com",
-    "client_id": "115883017364423416626",
-    "auth_uri": "https://accounts.google.com/o/oauth2/auth",
-    "token_uri": "https://oauth2.googleapis.com/token",
-    "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
-    "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/firebase-adminsdk-z2vwc%40smart-city-54346.iam.gserviceaccount.com"
-  }
-  
+  "type": "service_account",
+  "project_id": "smart-city-54346",
+  "private_key_id": "a62a0ab84d7d8ad70e51520bfcd7391692ce7346",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvwIBADANBgkqhkiG9w0BAQEFAASCBKkwggSlAgEAAoIBAQCM6Zjc8QoPGNgt\noyrdDAlPiEf7ZCSYDDAIsHdx5gwqvhPaFw8SWii3pDESHpb28E/iTNV/i4jvwGeC\np93JLtRcOao06Y936OCeLBWYZzqktKengbFgrskHZGHbchrQgBkV4Ndbb0JSj8uq\nF4TxY2QRWGBGpNI1t3cLn8V9LZvTEoZxq9ujgL8MmMLMyPr3vGGLg/bP8vHq0wE0\neIf+EeB9OPs6AgU5qM40k+lP0WvnLwSCAgiIJQuGIs7Noxi69LZi1lYNJhuFAM75\n8hHiiFBtfy7j2ftPoH8SewRIPDoLJ8dD0rCnirTlsXqJoW76ZKKr+XQapQ+9V5y0\n/vOlFAExAgMBAAECggEAQC1DyZyeEDIoguCFbRdGRkqzPfNmFzm1xr9YJy+26uCW\n+gT2gE0/riPBlZcI+n6IY3DK68QJIehnPEJn6HDDlx1MP7z/8oTFiERbsYWSV+FP\nWiLfPkFcnVlCmEdnnv44bpZwftw1QJTtFRKRIb86nAu8DXCTrJNaTJj/wPs8tOxV\n2jZxxy1wbiIKoZz+0sWm8QUF1Q0TjXBDqkIXX8ib6wCwK2spxZYqADAT3v21MEd0\nRozWrqT5Jk8Cv62TGQYtcLP++z/VcpgblLjcJIJ0iXyTAxJeXOX5BjUWbyatMhQD\nVy2AORak8MHXwwhQVFCt6o56mNqabpiQLEgBBMG1YQKBgQDFrH/MHMK27dE5VO9e\n2e3OlFOo2IvqXyODm/bjlBo3hYAXYMfhbbUlrBWkE7tSptpDPI2k4Mws6XcfDxYJ\nRvI3dmZHcsLwf/1MWbJ2gMhTsqSKJfz1N1yqjU5FDOkh8nlKdk2QhFZ0XMzIevLa\nwrkI/qouksrYA8FOY/iqhDsv5wKBgQC2fZIOT8n5VmeJ/Fj0Sa6EOZLGpCX6WaII\nYX86C7EGLvxhGmHSsCnd/3Pf980xw4zpONHvL3JTxu+JeANCTvJ0BgS/OQio5/E0\ntRGyUlLhqXwxD5sBKSzuSIkzBC73OUNVhy7h6ptldFHJr/5ZPPHpLFh9hpKf8JcS\nPMgk7YADJwKBgQC8Y9EMO2DLLE2ZQTw8fp/ooG423eJCxNc459xdOlneDkpsfV0h\nmAfrVlztmayOcdxT9hLcTy3no71WiW8r+kR/3URO1a25vZEvQdEWpVfGhNvRmbDC\nFzgmhzNQFaTeKJO2BpeXorguf/7fFmX7XVcxnluctWPCiZmiVx63i/xIgwKBgQCB\nZRYb6b1Xe0mdEH3ucRQ6EyychqWbFtUKRj9U5BdYQBaZr4AvSNPW4hvCcc1f/L08\nXRqWEzloZ8VO3vbInHvTgrT49bLLOPLRoZXzr+WutmMl0l/g+dYu+uW1c8DtcP/q\ndBjs/VHEJS8c6BpcIheRcu0nzDTJDWnA97IeZPyAvwKBgQCdMlW55+xd/8zlcLkK\nLkVpKLSaseq0VdGpHO/sB0n3+DY6XSK+QxmXE0Ws5XWURozLfgp8vJOF1UCb9rW3\nSLyVxL1tvfvg8OEsuvplJSGJ7bg4GvKqcOxPNtKddDyeizjMK7oqhUdWTjJCSx4Q\nluDzVPYhwoQ9r6bsnXNsHCenRQ==\n-----END PRIVATE KEY-----\n",
+  "client_email": "firebase-adminsdk-z2vwc@smart-city-54346.iam.gserviceaccount.com",
+  "client_id": "115883017364423416626",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/firebase-adminsdk-z2vwc%40smart-city-54346.iam.gserviceaccount.com"
+}

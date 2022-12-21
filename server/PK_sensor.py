@@ -4,10 +4,17 @@ import json
 from rpi_lcd import LCD
 import RPi.GPIO as GPIO
 import time
-GPIO.setmode(GPIO.BCM)
+from datetime import datetime
+import math
+import db
 
-TRIG = 23
-ECHO = 24
+GPIO.setmode(GPIO.BCM)
+GPIO.setwarnings(False)
+
+
+lcd = LCD()
+TRIG = 18
+ECHO = 6 # space 8
 LED_RED = 17
 LED_GREEN = 22
 LED_RED1 = 26
@@ -36,6 +43,9 @@ GPIO.setup(LED_RED,GPIO.OUT)
 GPIO.setup(LED_GREEN1,GPIO.OUT)
 GPIO.setup(LED_RED1,GPIO.OUT)
 
+GPIO.setwarnings(False)
+prev_PK_space = False
+
 try:
     lcd.clear()
     lcd.text("Waiting for ",1)
@@ -60,46 +70,36 @@ try:
         distance = pulse_duration * 17150
         distance = round(distance, 1)
         
-        if distance >= 20:
+        if distance >= 8:
             GPIO.output(LED_GREEN, GPIO.HIGH)
             GPIO.output(LED_GREEN1, GPIO.HIGH)
             # GPIO.output(LED_RED1, GPIO.HIGH)
             
             GPIO.output(LED_RED, GPIO.LOW) 
-            GPIO.output(LED_RED1, GPIO.LOW) 
-            lcd.clear() 
-            lcd.text("Beschikbaar:" ,1) 
-            text = "Plaats"
-            if GPIO.input(LED_GREEN) == True:
-                text += " 1"
-            if GPIO.input(LED_GREEN1) == True:
-                text += " ,2"
-            if GPIO.input(LED_RED) == True:
-                text = text.replace("1", "")
-                text = text.replace(",2", "2") 
-            if GPIO.input(LED_RED1) == True:
-                text = text.replace(",2", "") 
-            # else:
-            
-            lcd.text(text ,2) 
-
-            
+            PK_space = False # Space free
+            db.save_pk_spaces(ECHO, PK_space)
+            print('groen')
+            if prev_PK_space != PK_space:
+                prev_PK_space = False
+                end_time = datetime.now()
+                db.save_car_parked(begin_time, end_time)
+                print('send db timestamp end')
         else:
             GPIO.output(LED_GREEN, GPIO.LOW)
-            GPIO.output(LED_RED, GPIO.HIGH) 
-            if len(text) <= 7:
-                lcd.clear()
-                lcd.text("Garage is vol",1)
-            elif GPIO.input(LED_RED) == True:
-                text = text.replace("1", "")
-                text = text.replace(",2", "2") 
-                lcd.text(text ,2) 
-            elif GPIO.input(LED_RED1) == True:
-                text = text.replace(",2", "") 
-                lcd.text(text ,2) 
- 
-        # lcd.clear()
-        # lcd.text("Distance:" + str(distance) + "cm",1)
+            PK_space = True # Space occupied
+            GPIO.output(LED_RED, GPIO.HIGH)
+            db.save_pk_spaces(ECHO, PK_space)
+            print('rood')
+            if prev_PK_space != PK_space:
+                prev_PK_space = True
+                begin_time = datetime.now()
+                print('begin_time ', begin_time)
+                print('send db timestamp begin')
+    
+        time.sleep(2)
+        lcd.clear()
+        lcd.text("Plek {} vrij".format(db.get_free_space()), 1) 
+    
 except KeyboardInterrupt:
     print("Cleaning up!")
     GPIO.cleanup
