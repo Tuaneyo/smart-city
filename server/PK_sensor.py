@@ -2,11 +2,14 @@ from operator import le
 from rpi_lcd import LCD
 import RPi.GPIO as GPIO
 import time
+import db
+
 GPIO.setmode(GPIO.BCM)
 
+
 lcd = LCD()
-TRIG = 23   
-ECHO = 24
+TRIG = 18
+ECHO = 6 # space 8
 LED_RED = 17
 # LED_YELLOW = 27
 LED_GREEN = 22
@@ -43,17 +46,22 @@ try:
         distance = pulse_duration * 17150
         distance = round(distance, 1)
         
-        if distance >= 20:
+        if distance >= 8:
             GPIO.output(LED_GREEN, GPIO.HIGH)
             GPIO.output(LED_RED, GPIO.LOW) 
-            PK_space = 0
+            PK_space = False # Space free
+            db.save_pk_spaces(ECHO, PK_space)
+            print('groen')
         else:
             GPIO.output(LED_GREEN, GPIO.LOW)
-            PK_space = 1
-            GPIO.output(LED_RED, GPIO.HIGH)  
+            PK_space = True # Space occupied
+            GPIO.output(LED_RED, GPIO.HIGH)
+            db.save_pk_spaces(ECHO, PK_space)
+            print('rood')
+    
         time.sleep(2)
-        lcd.clear()            
-        lcd.text(str(PK_space),1) 
+        lcd.clear()
+        lcd.text("Plek {} vrij".format(db.get_free_space()), 1) 
     
 except KeyboardInterrupt:
     print("Cleaning up!")
