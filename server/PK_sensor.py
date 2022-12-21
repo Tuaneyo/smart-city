@@ -2,9 +2,12 @@ from operator import le
 from rpi_lcd import LCD
 import RPi.GPIO as GPIO
 import time
-import db
+from datetime import datetime
+import math
+# import db
 
 GPIO.setmode(GPIO.BCM)
+GPIO.setwarnings(False)
 
 
 lcd = LCD()
@@ -22,6 +25,8 @@ GPIO.setup(LED_GREEN,GPIO.OUT)
 GPIO.setup(LED_RED,GPIO.OUT)
 
 GPIO.setwarnings(False)
+prev_PK_space = False
+
 try:
     lcd.clear()
     lcd.text("Waiting for ",1)
@@ -50,18 +55,30 @@ try:
             GPIO.output(LED_GREEN, GPIO.HIGH)
             GPIO.output(LED_RED, GPIO.LOW) 
             PK_space = False # Space free
-            db.save_pk_spaces(ECHO, PK_space)
+            # db.save_pk_spaces(ECHO, PK_space)
             print('groen')
+            if prev_PK_space != PK_space:
+                prev_PK_space = False
+                end_time = datetime.now()
+                print("end_time ", end_time)
+                delta = end_time - begin_time
+                print("Delta: ", math.floor(delta.total_seconds()))
+                print('send db timestamp park space occupied end')
         else:
             GPIO.output(LED_GREEN, GPIO.LOW)
             PK_space = True # Space occupied
             GPIO.output(LED_RED, GPIO.HIGH)
-            db.save_pk_spaces(ECHO, PK_space)
+            # db.save_pk_spaces(ECHO, PK_space)
             print('rood')
+            if prev_PK_space != PK_space:
+                prev_PK_space = True
+                begin_time = datetime.now()
+                print('begin_time ', begin_time)
+                print('send db timestamp park space occupied begin')
     
         time.sleep(2)
         lcd.clear()
-        lcd.text("Plek {} vrij".format(db.get_free_space()), 1) 
+        # lcd.text("Plek {} vrij".format(db.get_free_space()), 1) 
     
 except KeyboardInterrupt:
     print("Cleaning up!")
