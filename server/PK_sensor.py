@@ -76,7 +76,7 @@ try:
     
         time.sleep(2)
         lcd.clear()
-        # lcd.text("Plek {} vrij".format(db.get_free_space()), 1) 
+        lcd.text("Plek {} vrij".format(db.get_free_space()), 1) 
     
 except KeyboardInterrupt:
     print("Cleaning up!")
