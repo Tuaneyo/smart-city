@@ -8,22 +8,26 @@ import { dbService } from "../../services/db.services.js";
 export default function HeaderStats() {
   const [data, setData] = useState([
     {
-      title: 'Plaatsen vrij',
-      statValue: '1',
+      title: 'Parkeer plaatsen vrij',
+      statDescription: 'vrije parkeerplekken en het totaal',
+      statValue: '0',
       color: 'bg-green-500'
     },
     {
       title: 'Gemiddeld parkeertijd',
+      statDescription: 'Eenheid in secondes',
       statValue: '',
       color: 'bg-orange-500'
     },
     {
-      title: 'Meest gebruikt parkeervak',
+      title: 'Favorite parkeervak',
+      statDescription: 'Meest gebruikte parkeervak',
       statValue: '',
       color: 'bg-pink-500'
     },
     {
-      title: 'Slagboom ',
+      title: 'Mediaan waarde ',
+      statDescription: 'Van de parkeertijd datasets',
       statValue: 'Dicht',
       color: 'bg-purple-500'
     },
@@ -31,22 +35,29 @@ export default function HeaderStats() {
 
   useEffect(() => {
     
-    const freeSpaces = async () => {
-      const freeSpaces = await dbService.fetchSpaces();
-      console.log(freeSpaces);
-      setData(current =>
-        current.map((obj, idx) => {
-          if (idx === 0) {
-            return {...obj, statValue: freeSpaces};
-          }
-          return obj;
-        }),
-      );
-    }
-    freeSpaces();
+    const getStats = async () => {
+      const parkingStats = await dbService.getParkingStats()
+      // eslint-disable-next-line array-callback-return
+      Object.keys(parkingStats).map((valueKey, idx) => {
+        updateStatsState(parkingStats[valueKey], idx)
+      })
 
-    
+      await dbService.fetchCarParking()
+    }
+    getStats();
+
   }, [])
+
+  const updateStatsState = (data, index) => {
+    setData(current =>
+      current.map((obj, idx) => {
+        if (idx === index) {
+          return {...obj, statValue: data};
+        }
+        return obj;
+      }),
+    );
+  }
 
   return (
     <>
@@ -66,6 +77,7 @@ export default function HeaderStats() {
                         statArrow="up"
                         statIconName="far fa-chart-bar"
                         statIconColor={item.color}
+                        statDescripiron={item.statDescription}
                       />
                     </div>
                   </React.Fragment>

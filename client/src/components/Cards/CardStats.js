@@ -6,11 +6,12 @@ export default function CardStats({
   statTitle,
   statIconName,
   statIconColor,
+  statDescripiron
 }) {
   return (
     <>
-      <div className="relative flex flex-col min-w-0 break-words bg-white rounded mb-6 xl:mb-0 shadow-lg">
-        <div className="flex-auto p-4">
+      <div className="relative h-full flex flex-col min-w-0 break-words bg-white rounded mb-6 xl:mb-0 shadow-lg">
+        <div className="flex-auto p-4 h-full">
           <div className="flex flex-wrap">
             <div className="relative w-full pr-4 max-w-full flex-grow flex-1">
               <h5 className="text-blueGray-400 uppercase font-bold text-xs">
@@ -31,6 +32,9 @@ export default function CardStats({
               </div>
             </div>
           </div>
+          <p className="text-sm text-blueGray-400 mt-4">
+            <small className="whitespace-nowrap">{statDescripiron}</small>
+          </p>
         </div>
       </div>
     </>
@@ -39,7 +43,7 @@ export default function CardStats({
 
 CardStats.defaultProps = {
   statSubtitle: "Traffic",
-  statTitle: "350,897",
+  statTitle: "0",
   statIconName: "far fa-chart-bar",
   statIconColor: "bg-red-500",
 };
