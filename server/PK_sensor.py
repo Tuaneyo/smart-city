@@ -98,7 +98,11 @@ try:
     
         time.sleep(2)
         lcd.clear()
-        lcd.text("Plek {} vrij".format(db.get_free_space()), 1) 
+        spaces_text = db.get_free_space()
+        if spaces_text:
+            lcd.text("Plek {} vrij".format(spaces_text), 1)
+        else:
+            lcd.text("Garage is vol", 1)
     
 except KeyboardInterrupt:
     print("Cleaning up!")
