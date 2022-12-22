@@ -5,6 +5,8 @@ import uuid
 from datetime import datetime
 import math
 import services
+import operator
+
 
 cred = credentials.Certificate('/home/pi/smart-city/smart-city/server/firebaseServiceKey.json')
 
@@ -32,31 +34,54 @@ def get_free_space():
     return spaces_text.rstrip(', ')
 
 
-def register_car():
+def register_car(count_type = 'increment'):
     t = services.get_today()
-    cars_ref = db.collection(u'parking').document(u'{}'.format(t)).get()
+    cars_ref = db.collection(u'parking').document(u'cars').get()
     cars_count = 0
+    full = False
+
     if cars_ref.exists:
-        cars_count = cars_ref.to_dict()['count']
+        cars_count = cars_ref.to_dict()[t]
         print('car_count', cars_count)
         if cars_count >= services.PARKING_SIZE:
             print('Garage is vol')
-            return
+            full = True
+
+    if count_type == 'increment' and full == False:
+        cars_count = cars_count + 1
+    elif count_type == 'decrement':
+        cars_count = cars_count - 1
+
     data = {
-        u'count': cars_count + 1
+        u'{}'.format(t): cars_count
     }
-    db.collection(u'parking').document(u'{}'.format(t)).set(data, merge=True)
-    return True
+    db.collection(u'parking').document('cars').set(data, merge=True)
+    return full
 
 
-# def unregister_car():
-#     cars_ref = db.collection(u'parking').document('cars').get()
-#     cars_count = cars_ref.to_dict()['count']
-#     print(cars_count)
+# def register_car(count_type = 'increment'):
+#     t = services.get_today()
+#     cars_ref = db.collection(u'parking').document(u'{}'.format(t)).get()
+#     cars_count = 0
+#     full = False
+
+#     if cars_ref.exists:
+#         cars_count = cars_ref.to_dict()['count']
+#         print('car_count', cars_count)
+#         if cars_count >= services.PARKING_SIZE:
+#             print('Garage is vol')
+#             full = True
+
+#     if count_type == 'increment' and full == False:
+#         cars_count = cars_count + 1
+#     elif count_type == 'decrement':
+#         cars_count = cars_count - 1
+
 #     data = {
-#         u'count': cars_count - 1
+#         u'count': cars_count
 #     }
-#     db.collection(u'parking').document(u'cars').set(data, merge=True)
+#     db.collection(u'parking').document(u'{}'.format(t)).set(data, merge=True)
+#     return full
 
 def save_car_parked(begin_time, end_time):
     delta = end_time - begin_time

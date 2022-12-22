@@ -15,6 +15,7 @@ GPIO.setwarnings(False)
 lcd = LCD()
 TRIG = 18
 ECHO = 6 # space 8
+PARKING_SPACE = 6
 LED_RED = 17
 LED_GREEN = 22
 LED_RED1 = 26
@@ -77,7 +78,7 @@ try:
             
             GPIO.output(LED_RED, GPIO.LOW) 
             PK_space = False # Space free
-            db.save_pk_spaces(ECHO, PK_space)
+            db.save_pk_spaces(PARKING_SPACE, PK_space)
             print('groen')
             if prev_PK_space != PK_space:
                 prev_PK_space = False
@@ -88,7 +89,7 @@ try:
             GPIO.output(LED_GREEN, GPIO.LOW)
             PK_space = True # Space occupied
             GPIO.output(LED_RED, GPIO.HIGH)
-            db.save_pk_spaces(ECHO, PK_space)
+            db.save_pk_spaces(PARKING_SPACE, PK_space)
             print('rood')
             if prev_PK_space != PK_space:
                 prev_PK_space = True
