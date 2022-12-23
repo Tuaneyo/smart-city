@@ -5,7 +5,6 @@ import uuid
 from datetime import datetime
 import math
 import services
-import operator
 
 
 cred = credentials.Certificate('/home/pi/smart-city/smart-city/server/firebaseServiceKey.json')
@@ -40,7 +39,7 @@ def register_car(count_type = 'increment'):
     cars_count = 0
     full = False
 
-    if cars_ref.exists:
+    if t in cars_ref.to_dict():
         cars_count = cars_ref.to_dict()[t]
         print('car_count', cars_count)
         if cars_count >= services.PARKING_SIZE:
@@ -58,35 +57,10 @@ def register_car(count_type = 'increment'):
     db.collection(u'parking').document('cars').set(data, merge=True)
     return full
 
-
-# def register_car(count_type = 'increment'):
-#     t = services.get_today()
-#     cars_ref = db.collection(u'parking').document(u'{}'.format(t)).get()
-#     cars_count = 0
-#     full = False
-
-#     if cars_ref.exists:
-#         cars_count = cars_ref.to_dict()['count']
-#         print('car_count', cars_count)
-#         if cars_count >= services.PARKING_SIZE:
-#             print('Garage is vol')
-#             full = True
-
-#     if count_type == 'increment' and full == False:
-#         cars_count = cars_count + 1
-#     elif count_type == 'decrement':
-#         cars_count = cars_count - 1
-
-#     data = {
-#         u'count': cars_count
-#     }
-#     db.collection(u'parking').document(u'{}'.format(t)).set(data, merge=True)
-#     return full
-
-def save_car_parked(begin_time, end_time):
+def save_car_parked(begin_time, end_time, space):
     delta = end_time - begin_time
     data = {
-        u'space_id': 1,
+        u'space_id': space,
         u'start': begin_time,
         u'end': end_time,
         u'total': math.floor(delta.total_seconds())
