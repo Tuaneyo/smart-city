@@ -4,7 +4,7 @@ import moment from 'moment';
 
 // components
 
-export default function CardPageVisits() {
+export default function CardBarTable() {
   const [parkedData, setParkedData] = useState({})
 
   useEffect(() => {

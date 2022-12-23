@@ -25,7 +25,6 @@ def get_free_space():
     spaces_text = ''
     for space in spaces_ref:
         space_id = space.id
-        # space_data = space.to_dict()
         spaces_text = spaces_text + str(space_id) + ', '
 
     if spaces_text == '':
